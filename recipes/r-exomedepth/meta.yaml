@@ -1,0 +1,55 @@
+package:
+  name: exomedepth
+  version: 1.1.10
+
+source:
+  fn:  ExomeDepth_1.1.10.tar.gz
+  url: https://cran.r-project.org/src/contrib/ExomeDepth_1.1.10.tar.gz
+  md5: 2354132d3a08d227474cd54efc5f7ae4
+
+build:
+  number: 0
+  rpaths:
+    - lib/R/lib/
+    - lib/
+
+requirements:
+  build:
+    - bioconductor-iranges
+    - bioconductor-biostrings
+    - bioconductor-genomicranges
+    - bioconductor-genomicalignments
+    - bioconductor-rsamtools
+    - r-vgam
+    - r-aod
+    - r
+
+  run:
+    - bioconductor-iranges
+    - bioconductor-biostrings
+    - bioconductor-genomicranges
+    - bioconductor-genomicalignments
+    - bioconductor-rsamtools
+    - r-vgam
+    - r-aod
+    - r
+
+test:
+  commands:
+    - '$R -e "library("ExomeDepth")"'
+
+about:
+  home: https://cran.r-project.org/web/packages/ExomeDepth/index.html
+  license: 'GPL v3'
+  summary: 'ExomeDepth uses read depth data to call CNVs from exome sequencing experiments. 
+	A key idea is that the test exome should be compared to a matched aggregate reference set. 
+	This aggregate reference set should combine exomes from the same batch and it should also be optimized for each exome. 
+	It will certainly differ from one exome to the next.Importantly, ExomeDepth assumes that the CNV of interest is absent from 
+	the aggregate reference set. Hence related individuals should be excluded from the aggregate reference. It also means that ExomeDepth 
+	can miss 2 common CNVs, if the call is also present in the aggregate reference. ExomeDepth is really suited to detect rare
+	CNV calls (typically for rare Mendelian disorder analysis). The ideas used in this package are of course not specific to exome sequencing 
+	and could be applied to other targeted sequencing datasets, as long as they contain a sufficiently large number of exons to estimate 
+	the parameters (at least 20 genes, say, but probably more would be useful). Also note that PCR based enrichment studies are often
+	not well suited for this type of read depth analysis. The reason is that as the number of cycles is often set to a high
+	number in order to equalize the representation of each amplicon, which can discard the CNV information.'
+ 
